@@ -13,7 +13,7 @@ class CreateNewToiletIntegrationTest : FunSpec({
         val createNewToiletByAnonymousOwner = CreateNewToiletByAnonymousOwner(toiletRepository)
         val owner = AnonymousOwnerRequest("123")
         val ownerId = UUID.nameUUIDFromBytes(owner.deviceId.toByteArray())
-        val request = CreateToiletByAnonymousOwnerRequest("Vinyl Bar", 1.0, 2.0, owner)
+        val request = AnonymousToiletRequest("Vinyl Bar", 1.0, 2.0, owner)
 
 
         createNewToiletByAnonymousOwner.execute(request)
@@ -24,7 +24,7 @@ class CreateNewToiletIntegrationTest : FunSpec({
         toilet.name shouldBe request.name
         toilet.geolocation.latitude shouldBe request.latitude
         toilet.geolocation.longitude shouldBe request.longitude
-        toilet.ownerId shouldBe ownerId
+        toilet.owner shouldBe ownerId
     }
 
 })
